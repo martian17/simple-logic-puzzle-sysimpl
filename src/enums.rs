@@ -10,7 +10,6 @@ pub use direction::Direction;
 pub struct World {
     pub villager_1: Villager,
     pub villager_2: Villager,
-    pub villager_3: Villager,
     pub direction_heaven: Direction,
 }
 
@@ -19,13 +18,12 @@ impl World {
     pub fn random() -> Self {
         let mut rng = rand::rng(); // or rand::thread_rng() in rand 0.8
 
-        let mut villagers = [Villager::Random, Villager::Truth, Villager::False];
+        let mut villagers = [Villager::Truth, Villager::False];
         villagers.shuffle(&mut rng);
-        let [villager_1, villager_2, villager_3] = villagers;
+        let [villager_1, villager_2] = villagers;
         World {
             villager_1,
             villager_2,
-            villager_3,
             direction_heaven: Direction::random(),
         }
     }
@@ -47,7 +45,6 @@ impl std::fmt::Display for World {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         writeln!(f, "villager_1: {}", self.villager_1)?;
         writeln!(f, "villager_2: {}", self.villager_2)?;
-        writeln!(f, "villager_3: {}", self.villager_3)?;
         writeln!(f, "direction_heaven: {}", self.direction_heaven)
     }
 }
